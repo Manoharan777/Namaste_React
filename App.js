@@ -2,16 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 
-const parent = React.createElement("div", { id: "parent" }, [
-  React.createElement("div", { id: "child" }, [
-    React.createElement("h1", {}, "i am h1 tag below child"),
-    React.createElement("p", {}, "i am h2 tag below child"),
-  ]),
-  React.createElement("div", { id: "child2" }, [
-    React.createElement("h1", {}, "i am h1 tag below child"),
-    React.createElement("p", {}, "i am h2 tag below child"),
-  ]),
-]);
+const Tile = () => <p>Tile comp</p>
+ 
+//compnent composition
+export  const App = () => {
+  var ans = 9000;
+  return (
+    <>
+      <h1>Hi this is manoharan </h1>
+      <Tile/>
+      {Tile()} and {ans}
+      <p>from react namastte</p>
+    </>
+  );
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(parent);
+root.render(<App />);
