@@ -1,0 +1,9 @@
+npx parcel index.html => to host your app.
+npx => to execute the package
+
+# Parcel
+Dev Build
+Local Server
+HMR = Hot Module Replacement
+File Watching Algorithm - written in C++|
+faster build its caching.
