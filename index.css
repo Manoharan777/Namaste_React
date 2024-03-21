@@ -1,3 +1,69 @@
-#heading{
-    color: red;
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+}
+
+
+.logo {
+    width: 150px;
+    height: 100px;
+    margin-top: 5px;
+}
+
+.nav-items{
+    padding: 10px;
+    margin-right: 20px;
+}
+
+
+.nav-items > ul {
+    display: flex;
+    list-style: none;
+        font-size: 25px;
+
+}
+.nav-items > ul > li {
+    padding: 10px;
+    margin: 10px;
+
+}
+.search{
+    padding: 10px;
+}
+
+.card{
+    padding: 10px;
+    background-color: lightgray;
+    width: 200px;
+    margin: 5px;
+   
+}
+
+.card:hover{
+border: 1px solid black;
+cursor: pointer;
+}
+
+.restro-logo{
+    width: 190px;
+    height: 150px;
+    margin-left: 2.5px;
+}
+.restro-conatiner{
+    display: flex;
+
+    flex-wrap: wrap;
+}
+
+.filter-btn{
+    padding: 5px;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.filter{
+    margin: 10px;
 }
