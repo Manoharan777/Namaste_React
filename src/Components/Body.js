@@ -1,20 +1,20 @@
 import Restrocard from "./Restrocard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [resdata, setResData] = useState([]);
   const [filterres, setFilterres] = useState([]);
   const [searchinput, setSearchInput] = useState("");
   const handlefilter = () => {
-    const filterted = resdata.filter((item) => item.info.avgRating > 4.2);
-    setResData(filterted);
+    const filterted = resdata.filter((item) => item.info.avgRating > 4.4);
+    setFilterres(filterted);
   };
 
   const fetchdata = async () => {
     const response = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.93925&lng=77.7000932&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.93925&lng=77.7000932&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
 
     const result = await response.json();
     //optional chaining
@@ -60,7 +60,9 @@ const Body = () => {
       </div>
       <div className="restro-conatiner">
         {filterres.map((res) => (
-          <Restrocard key={res.info.id} resdata={res} />
+          <Link to={"/restaurant/" + res.info.id} key={res.info.id}>
+            <Restrocard resdata={res} />
+          </Link>
         ))}
       </div>
     </div>
