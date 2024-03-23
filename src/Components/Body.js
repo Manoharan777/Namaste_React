@@ -1,32 +1,65 @@
 import Restrocard from "./Restrocard";
-import restaurant from "../utils/MockData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
-const [data, setData] = useState(restaurant);
+  const [resdata, setResData] = useState([]);
+  const [filterres, setFilterres] = useState([]);
+  const [searchinput, setSearchInput] = useState("");
   const handlefilter = () => {
-    const filterted = data.filter((item) => item.info.avgRating > 4.2);
-   setData(filterted);
+    const filterted = resdata.filter((item) => item.info.avgRating > 4.2);
+    setResData(filterted);
   };
 
-  return (
+  const fetchdata = async () => {
+    const response = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.93925&lng=77.7000932&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+
+    const result = await response.json();
+    //optional chaining
+    const { restaurants } =
+      result?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle;
+    setResData(restaurants);
+    setFilterres(restaurants);
+  };
+
+  useEffect(() => {
+    fetchdata();
+  }, []);
+
+  const handlesearch = () => {
+    const searchdata = resdata.filter((item) =>
+      item.info.name.toLowerCase().includes(searchinput.toLowerCase())
+    );
+
+    setFilterres(searchdata);
+  };
+
+  return resdata.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body-container">
-      {/* <div className="search">search</div> */}
       <div className="filter">
+        <div className="search">
+          <input
+            type="text"
+            placeholder="Search foods,Restaurants"
+            value={searchinput}
+            onChange={(e) => {
+              setSearchInput(e.target.value);
+            }}
+          />
+          <button className="filter-btn" onClick={handlesearch}>
+            search
+          </button>
+        </div>
         <button onClick={handlefilter} className="filter-btn">
           Top Rated Restaurant
         </button>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            setData(restaurant);
-          }}
-        >
-          back to state
-        </button>
       </div>
       <div className="restro-conatiner">
-        {data.map((res) => (
+        {filterres.map((res) => (
           <Restrocard key={res.info.id} resdata={res} />
         ))}
       </div>
