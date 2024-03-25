@@ -1,27 +1,14 @@
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CDN_URL, MENU_RES } from "../utils/constants";
+import Shimmer from "./Shimmer"
+import useRestaurantMenu from "../utils/useRestaurantMenu";
+
 const RestaurantMenu = () => {
-  const [resmenu, setResMenu] = useState(null);
   const { resid } = useParams();
-  const fetchMenu = async () => {
-    try {
-      const response = await fetch(MENU_RES+resid);
-      const result = await response.json();
-      setResMenu(result);
-    } catch (error) {
-      console.error("Error fetching menu:", error);
-    }
-  };
+  const resmenu = useRestaurantMenu(resid, MENU_RES);
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
-
- // console.log(resid);
   if (!resmenu) {
-    return <div>Loading...</div>;
+    return <Shimmer/>;
   }
 
   const { data } = resmenu;
@@ -35,7 +22,6 @@ const RestaurantMenu = () => {
     cuisines,
     cloudinaryImageId,
   } = data.cards[0]?.card?.card?.info;
-
 
   // Extract menu items if they exist
   const menuItems =
@@ -55,7 +41,7 @@ const RestaurantMenu = () => {
       </h5>
       <ul>
         List of Menu's
-        <hr/>
+        <hr />
         {menuItems.map((menuItem) => (
           <li key={menuItem.card.info.id}>{menuItem.card.info.name}</li>
         ))}

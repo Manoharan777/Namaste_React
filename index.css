@@ -87,3 +87,12 @@
     padding: 0px 10px;
     cursor: pointer;
 }
+
+
+.user-card{
+    padding: 10px;
+    background-color: orange;
+    color: white;
+    border-radius: 5px;
+    margin: 15px;
+}
