@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { LOGO_URL } from "../utils/constants";
+import React, { useState } from "react";
+import foodlogo from "../../asset/food logo.png";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 const Header = () => {
@@ -7,12 +7,12 @@ const Header = () => {
   const onlinestatus = useOnlineStatus();
 
   return (
-    <div className="header">
+    <div className="header flex justify-between shadow-md">
       <div className="logo_container">
-        <img className="logo" src={LOGO_URL} />
+        <img className="logo w-24" src={foodlogo} />
       </div>
-      <div className="nav-items">
-        <ul>
+      <div className="nav-items flex items-center">
+        <ul className="flex gap-6 p-4 m-4 ">
           <li>Online status: {onlinestatus ? "✅" : "🔴"}</li>
           <li>
             <Link to="/">Home</Link>
@@ -30,7 +30,7 @@ const Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <button
-            className="login"
+            className="login  bg-green-400 px-2 py-2 border rounded text-white"
             onClick={() => {
               setBtnstate(!btnstate);
             }}

@@ -6,7 +6,7 @@ const About = () => {
   const [gituser, setGituser] = useState(null);
   const fetchdata = async () => {
     const response = await fetch(
-      "https://api.github.com/users/subashk11/repos"
+      "https://api.github.com/users/manoharan777/repos"
     );
     const data = await response.json();
     console.log(data);
@@ -24,7 +24,7 @@ const About = () => {
     <div className="about">
       <h1>About us</h1>
       <h4>Food ordering app</h4>
-      <b>Our Develeopers are below</b>
+      <b>Our Develeoper's are below : </b>
       <User git={gituser} />
     </div>
   );
