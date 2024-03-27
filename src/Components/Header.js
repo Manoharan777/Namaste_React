@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import foodlogo from "../../asset/food logo.png";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import useContextApi from "../utils/useContextApi";
 const Header = () => {
   const [btnstate, setBtnstate] = useState(true);
   const onlinestatus = useOnlineStatus();
-
+  //usecontext data
+  const { userLogged } = useContext(useContextApi);
   return (
     <div className="header flex justify-between shadow-md">
       <div className="logo_container">
@@ -37,6 +39,7 @@ const Header = () => {
           >
             {btnstate ? "Login" : "Logout"}
           </button>
+          <li className="py-2 font-bold">User : {userLogged}</li>
         </ul>
       </div>
     </div>

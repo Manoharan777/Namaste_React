@@ -6,7 +6,6 @@ import useRestaurantMenu from "../utils/useRestaurantMenu";
 const RestaurantMenu = () => {
   const { resid } = useParams();
   const resmenu = useRestaurantMenu(resid, MENU_RES);
-  console.log("restaurentmenu", resmenu);
 
   if (
     !resmenu ||
@@ -28,10 +27,26 @@ const RestaurantMenu = () => {
   } = resmenu.data.cards[2]?.card?.card?.info || {};
 
   // Extract menu items if they exist
-  const menuItems =
+  const Recommended =
     resmenu.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
       ?.card?.itemCards || [];
 
+  // const combopack =
+  //   resmenu.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+  //     ?.card?.categories[0]?.itemCards || [];
+
+  console.log(
+    "cards = ",
+    resmenu.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards
+  );
+
+  const category =
+    resmenu.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) =>
+        c.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    ) || [];
+  console.log("category= ", category);
   return (
     <div className="menu m-5 p-5 w-auto text-center bg-slate-400 rounded-lg">
       <h1 className="font-bold text-xl py-2">{name}</h1>
@@ -46,12 +61,25 @@ const RestaurantMenu = () => {
       <h5>
         {locality}, {areaName}
       </h5>
+
+      <hr className="my-1" />
       <ul>
-        <li className="font-bold py-2">List of Menu's</li>
+        <li className="font-bold py-2">Recommended - ({Recommended.length})</li>
         <hr />
-        {menuItems.map((menuItem) => (
+        {Recommended.map((menuItem) => (
           <li className="text-white" key={menuItem.card.info.id}>
             {menuItem.card.info.name}
+          </li>
+        ))}
+      </ul>
+      <hr />
+
+      <ul>
+        <li className="font-bold py-2">items cards</li>
+        <hr />
+        {category.map((cat, index) => (
+          <li className="text-white" key={index}>
+            {cat.card.card.title}
           </li>
         ))}
       </ul>

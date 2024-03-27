@@ -26,18 +26,19 @@ const Restrocard = ({ resdata }) => {
   );
 };
 
-
 //Higher-order component
 
 export const recomenddedlabel = (Restrocard) => {
   return (props) => {
     return (
       <div>
-        <label className="absolute p-2 m-2 bg-black text-white rounded-md">Recommended</label>
+        <label className="absolute p-2 m-2 bg-black text-white rounded-md">
+          Recommended
+        </label>
         <Restrocard {...props} />
       </div>
-    )
-  }
+    );
+  };
 };
 
 export default Restrocard;
