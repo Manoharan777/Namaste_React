@@ -3,9 +3,14 @@ import foodlogo from "../../asset/food logo.png";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import useContextApi from "../utils/useContextApi";
+import { useSelector } from "react-redux";
 const Header = () => {
   const [btnstate, setBtnstate] = useState(true);
   const onlinestatus = useOnlineStatus();
+
+  //selector hook
+  const cart = useSelector((store) => store.cart.items);
+  console.log(cart);
   //usecontext data
   const { userLogged } = useContext(useContextApi);
   return (
@@ -25,8 +30,8 @@ const Header = () => {
           <li>
             <Link to="/contact">Contact</Link>
           </li>
-          <li>
-            <Link to="/cart">Cart</Link>
+          <li className="font-bold text-xl ">
+            <Link to="/cart">🛒 - ({cart.length} items)</Link>
           </li>
           <li>
             <Link to="/grocery">Grocery</Link>
@@ -34,12 +39,11 @@ const Header = () => {
           <button
             className="login  bg-green-400 px-2 py-2 border rounded text-white"
             onClick={() => {
-              setBtnstate(!btnstate);
+              setBtnstate(!btnstate)
             }}
-          >
-            {btnstate ? "Login" : "Logout"}
+           >Login
           </button>
-          <li className="py-2 font-bold">User : {userLogged}</li>
+          <li className="py-2 ">User : {userLogged}</li>
         </ul>
       </div>
     </div>

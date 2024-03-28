@@ -9,6 +9,8 @@ import RestaurantMenu from "./Components/RestaurantMenu";
 import Error from "./Components/Error";
 import useContextApi from "./utils/useContextApi";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 //code splliting using lazy loading... then wrap it with suspence component
 
@@ -17,20 +19,22 @@ const Grocery = lazy(() => import("./Components/Grocery"));
 export const AppLayout = () => {
   const [userName, setUserName] = useState();
 
-useEffect(()=>{
-  const data = {
-    name: "Mano"
-  }
-  setUserName(data.name);
-},[])
-
+  useEffect(() => {
+    const data = {
+      name: "Mano",
+    };
+    setUserName(data.name);
+  }, []);
+  //wrap it with redux provider and pass store frm configurestore slice
   return (
-    <useContextApi.Provider value={{ userLogged : userName}}>
-      <div className="app">
-        <Header />
-        <Outlet />
-      </div>
-    </useContextApi.Provider>
+    <Provider store={appStore}>
+      <useContextApi.Provider value={{ userLogged: userName }}>
+        <div className="app">
+          <Header />
+          <Outlet />
+        </div>
+      </useContextApi.Provider>
+    </Provider>
   );
 };
 

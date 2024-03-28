@@ -13,7 +13,7 @@ const Body = () => {
 
   const Recommendcard = recomenddedlabel(Restrocard);
 
-  console.log("Data= ",resdata);
+ // console.log("Data= ",resdata);
 
   const handlefilter = () => {
     const filterted = resdata.filter((item) => item.info.avgRating > 4.3);

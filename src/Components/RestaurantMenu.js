@@ -2,10 +2,13 @@ import { useParams } from "react-router-dom";
 import { CDN_URL, MENU_RES } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 const RestaurantMenu = () => {
   const { resid } = useParams();
   const resmenu = useRestaurantMenu(resid, MENU_RES);
+  const dispatch = useDispatch();
 
   if (
     !resmenu ||
@@ -15,6 +18,7 @@ const RestaurantMenu = () => {
   ) {
     return <Shimmer />;
   }
+ 
 
   const {
     name,
@@ -35,10 +39,10 @@ const RestaurantMenu = () => {
   //   resmenu.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
   //     ?.card?.categories[0]?.itemCards || [];
 
-  console.log(
-    "cards = ",
-    resmenu.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards
-  );
+  // console.log(
+  //   "cards = ",
+  //   resmenu.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards
+  // );
 
   const category =
     resmenu.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
@@ -46,7 +50,12 @@ const RestaurantMenu = () => {
         c.card?.card?.["@type"] ===
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     ) || [];
-  console.log("category= ", category);
+  //console.log("category= ", category);
+
+  const handleadditems = (itemname) => {
+    dispatch(addItem(itemname));
+  };
+
   return (
     <div className="menu m-5 p-5 w-auto text-center bg-slate-400 rounded-lg">
       <h1 className="font-bold text-xl py-2">{name}</h1>
@@ -67,8 +76,20 @@ const RestaurantMenu = () => {
         <li className="font-bold py-2">Recommended - ({Recommended.length})</li>
         <hr />
         {Recommended.map((menuItem) => (
-          <li className="text-white" key={menuItem.card.info.id}>
-            {menuItem.card.info.name}
+          <li
+            className="bg-cyan-200 my-2 py-2 rounded shadow-lg text-left px-2 font-semibold"
+            key={menuItem.card.info.id}
+          >
+            {menuItem.card.info.name} - ₹{" "}
+            {menuItem.card.info.price / 100
+              ? menuItem.card.info.price / 100
+              : menuItem.card.info.defaultPrice / 100}
+            <button
+              className="text-end bg-black text-white m-1 p-1 rounded"
+              onClick={() => handleadditems(menuItem)}
+            >
+              Add
+            </button>
           </li>
         ))}
       </ul>
@@ -78,7 +99,10 @@ const RestaurantMenu = () => {
         <li className="font-bold py-2">items cards</li>
         <hr />
         {category.map((cat, index) => (
-          <li className="text-white" key={index}>
+          <li
+            className="bg-cyan-200 my-2 py-2 rounded shadow-lg text-left px-2 font-semibold"
+            key={index}
+          >
             {cat.card.card.title}
           </li>
         ))}

@@ -7,3 +7,13 @@ Local Server
 HMR = Hot Module Replacement
 File Watching Algorithm - written in C++|
 faster build its caching.
+
+
+#Redux toolkit
+
+- install @reduxjs/toolkit and react-redux
+- build our store.
+- connect a store to our app
+- create a cart slice
+- dispatch the action 
+- read data using (selector).
