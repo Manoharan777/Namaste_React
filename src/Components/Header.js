@@ -10,7 +10,7 @@ const Header = () => {
 
   //selector hook
   const cart = useSelector((store) => store.cart.items);
-  console.log(cart);
+ // console.log(cart);
   //usecontext data
   const { userLogged } = useContext(useContextApi);
   return (
@@ -39,9 +39,10 @@ const Header = () => {
           <button
             className="login  bg-green-400 px-2 py-2 border rounded text-white"
             onClick={() => {
-              setBtnstate(!btnstate)
+              setBtnstate(!btnstate);
             }}
-           >Login
+          >
+            {btnstate ? "Login" : "Logout"}
           </button>
           <li className="py-2 ">User : {userLogged}</li>
         </ul>

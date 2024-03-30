@@ -3,7 +3,7 @@ import { CDN_URL } from "../utils/constants";
 import { clearCart, removeItem } from "../utils/cartSlice";
 const Cart = () => {
   const cartItem = useSelector((store) => store.cart.items);
-  console.log("cartitem = ", cartItem);
+ // console.log("cartitem = ", cartItem);
 
   const dispatch = useDispatch();
   const handleclearcart = () => {

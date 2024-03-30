@@ -9,7 +9,7 @@ const About = () => {
       "https://api.github.com/users/manoharan777/repos"
     );
     const data = await response.json();
-    console.log(data);
+   // console.log(data);
     setGituser(data);
   };
 

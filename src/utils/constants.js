@@ -5,3 +5,5 @@ export const CDN_URL =
     "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.93925&lng=77.7000932&restaurantId=";
     export const FETCH_RESTRO =
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.93925&lng=77.7000932&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
+      export const NETWORK_ERROR =
+        "https://global.discourse-cdn.com/brave/original/3X/9/d/9d46371a50170d8e6c7de90c1cfc48bef7768768.png";

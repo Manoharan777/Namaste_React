@@ -1,7 +1,8 @@
 import Restrocard, { recomenddedlabel } from "./Restrocard";
 import { useState } from "react";
 import Shimmer from "./Shimmer";
-import { FETCH_RESTRO } from "../utils/constants";
+import { FETCH_RESTRO, NETWORK_ERROR } from "../utils/constants";
+import offlinepage from "../../asset/offlinepage.png";
 import { Link } from "react-router-dom";
 import useRestaurant from "../utils/useRestaurant";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -29,7 +30,7 @@ const Body = () => {
 
   const onlinestatus = useOnlineStatus();
 
-  if (onlinestatus === false) return <h1>Look's like you are offline </h1>;
+  if (onlinestatus === false) return <img src={offlinepage} alt="Look's like you are offline,check your internet connection" />;;
 
   return resdata.length === 0 ? (
     <Shimmer />
@@ -41,7 +42,7 @@ const Body = () => {
             type="text"
             className=" m-4 p-4 border border-solid border-black"
             placeholder="Search foods,Restaurants"
-            value={searchinput}
+            value={searchinput} 
             onChange={(e) => {
               setSearchInput(e.target.value);
             }}

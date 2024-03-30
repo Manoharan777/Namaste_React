@@ -17,3 +17,21 @@ faster build its caching.
 - create a cart slice
 - dispatch the action 
 - read data using (selector).
+
+#Types of testing(developer)
+
+1. unit testing
+2. integration testing
+3. end tot end (e2e) testing.
+
+#Setting up Testing in our app
+
+1. install react tsting library
+2. installed jest
+3. using babel install dependency
+4. create config file and paste  the configuration to configure babel. (this can overwrite default parcel babel)
+5. configure  parcel config file to disable default bable transpilation
+6. do jest configuration npx jest --init
+7. install jsdom library 
+8. install @babel/preset-react inside my babel config
+9. install testing-library/jest-dom
