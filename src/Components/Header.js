@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import foodlogo from "../../asset/food logo.png";
 import { Link } from "react-router-dom";
+import {LOGO_URL} from "../utils/constants"
 import useOnlineStatus from "../utils/useOnlineStatus";
 import useContextApi from "../utils/useContextApi";
 import { useSelector } from "react-redux";
@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <div className="header flex justify-between shadow-md">
       <div className="logo_container">
-        <img className="logo w-24" src={foodlogo} />
+        <img className="logo w-24" src={LOGO_URL} />
       </div>
       <div className="nav-items flex items-center">
         <ul className="flex gap-6 p-4 m-4 ">

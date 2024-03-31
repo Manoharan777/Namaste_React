@@ -1,6 +1,7 @@
 import { CDN_URL } from "../utils/constants";
 
 const Restrocard = ({ resdata }) => {
+  //console.log("ans" , resdata);
   const {
     name,
     cuisines,
@@ -9,7 +10,7 @@ const Restrocard = ({ resdata }) => {
     costForTwo,
     locality,
     sla,
-  } = resdata?.info;
+  } = resdata;
 
   return (
     <div className="card m-4 p-4 w-[300px] h-[525px]  bg-gray-300 rounded-lg hover:shadow-2xl hover:bg-orange-400 hover:text-white">
@@ -28,7 +29,7 @@ const Restrocard = ({ resdata }) => {
 
 //Higher-order component
 
-export const recomenddedlabel = (Restrocard) => {
+export const Recomenddedlabel = (Restrocard) => {
   return (props) => {
     return (
       <div>

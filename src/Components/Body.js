@@ -1,4 +1,4 @@
-import Restrocard, { recomenddedlabel } from "./Restrocard";
+import Restrocard, { Recomenddedlabel } from "./Restrocard";
 import { useState } from "react";
 import Shimmer from "./Shimmer";
 import { FETCH_RESTRO, NETWORK_ERROR } from "../utils/constants";
@@ -12,7 +12,7 @@ const Body = () => {
 
   const resdata = useRestaurant(FETCH_RESTRO, setFilterres);
 
-  const Recommendcard = recomenddedlabel(Restrocard);
+  const Recommendcard = Recomenddedlabel(Restrocard);
 
  // console.log("Data= ",resdata);
 
@@ -65,9 +65,9 @@ const Body = () => {
         {filterres.map((res) => (
           <Link to={"/restaurant/" + res.info.id} key={res.info.id}>
             {res.info.avgRating > 4.3 ? (
-              <Recommendcard resdata={res} />
+              <Recommendcard resdata={res.info} />
             ) : (
-              <Restrocard resdata={res} />
+              <Restrocard resdata={res.info} />
             )}
           </Link>
         ))}
